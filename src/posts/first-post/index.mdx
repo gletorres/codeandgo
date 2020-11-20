@@ -1,0 +1,99 @@
+---
+title: My first post
+slug: my-first-post
+date: 2020-03-21
+featureImage: nature-first-post.jpg
+excerpt: It’s been a while since I started web development. In this article, I will explain how I started coding, from making a single basic component to complex components, breaking complex code into a single piece of components to render a single file into the browser and other stuff.
+---
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+
+```html
+<div>Hello world</div>
+```
+
+This is the CSS
+
+```css
+.header {
+  color: red;
+  margin: 20px;
+  padding: 2px;
+}
+```
+
+This is JSX
+
+```jsx
+import React from "react"
+import { graphql } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { H1 } from "../elements"
+import { Container, Post, FeatureImage } from "../components"
+
+const singlePost = ({ data }) => {
+  const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.fixed
+
+  return (
+    <Container>
+      <FeatureImage fixed={featureImage} />
+      <Post>
+        <H1 margin="0 0 2rem 0">{data.mdx.frontmatter.title}</H1>
+        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+      </Post>
+    </Container>
+  )
+}
+
+export default singlePost
+
+export const pageQuery = graphql`
+  query SinglePostQuery($id: String!) {
+    mdx(id: { eq: $id }) {
+      body
+      frontmatter {
+        date
+        excerpt
+        slug
+        title
+        featureImage {
+          childImageSharp {
+            fixed {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+}
+```
+
+> If you hav any questions, please visit my website for more information
+> [glenntorres.com](https://glennptorres.netlify.app/)
+
+![This is markdown image](nature-first-post.jpg)
+
+1. First item
+2. Second item
+3. Third item
+
+- First item
+- Second item
+- Third item
+
+  Here's a sentence with a footnote. [^1]
+
+[^1]: This is the footnote.
