@@ -16,9 +16,9 @@ export const Nav = () => {
         <img src={data.logo.publicURL} alt="My Code Logo" />
       </Link>
 
-      <Link to="/">COURSES</Link>
+      <Link to="/">BLOG</Link>
       <Link to="/">SYNTAX</Link>
-      <Link to="/">HOME</Link>
+      <Link to="/">COURSES</Link>
     </NavWrapper>
   )
 }

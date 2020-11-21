@@ -6,7 +6,7 @@ import { FeatureImageWrapper } from "../elements"
 export const FeatureImage = ({ fixed }) => {
   const data = useStaticQuery(graphql`
     query {
-      imageSharp(fixed: { originalName: { eq: "codeko.PNG" } }) {
+      imageSharp(fixed: { originalName: { eq: "codeandgo-logo.png" } }) {
         fixed {
           ...GatsbyImageSharpFixed
         }
