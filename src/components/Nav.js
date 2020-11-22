@@ -17,8 +17,8 @@ export const Nav = () => {
       </Link>
 
       <Link to="/">BLOG</Link>
-      <Link to="/">SYNTAX</Link>
-      <Link to="/">COURSES</Link>
+      <Link to="/main">SYNTAX</Link>
+      <Link to="/courses">COURSES</Link>
     </NavWrapper>
   )
 }
