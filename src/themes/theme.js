@@ -10,8 +10,10 @@ export default {
     dark1: "hsl(227, 2%, 12%)",
     dark2: "hsl(227, 2%, 26%)",
     dark3: "hsl(227, 2%, 64%)",
-    light1: "hsl(0, 0%, 97%)",
-    light2: "hsl(0, 0%, 99%)",
+    light1: "hsl(0, 0%, 92%)",
+    light2: "hsl(0, 0%, 95%)",
+    light3: "hsl(0, 0%, 97%)",
+    light4: "hsl(0, 0%, 99%)",
   },
 
   breakpoints: {
@@ -33,6 +35,6 @@ export default {
     link: "color 0.2s ease",
   },
   shadows: {
-    shadow1: "0px 5px 20px rgba(30, 30, 31, 0.05)",
+    shadow1: "0px 7px 22px rgba(174, 174, 174 0.05)",
   },
 }
