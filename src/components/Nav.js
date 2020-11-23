@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, Link, graphql } from "gatsby"
-import { NavWrapper } from "../elements"
+import { NavWrapper, StyledLink } from "../elements"
 
 export const Nav = () => {
   const data = useStaticQuery(graphql`
@@ -16,9 +16,30 @@ export const Nav = () => {
         <img src={data.logo.publicURL} alt="My Code Logo" />
       </Link>
 
-      <Link to="/">BLOG</Link>
-      <Link to="/main">SYNTAX</Link>
-      <Link to="/courses">COURSES</Link>
+      <StyledLink>
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            color: "slategrey",
+          }}
+        >
+          BLOG
+        </Link>
+      </StyledLink>
+      <StyledLink>
+        <Link to="/main" style={{ textDecoration: "none", color: "slategrey" }}>
+          SYNTAX
+        </Link>
+      </StyledLink>
+      <StyledLink>
+        <Link
+          to="/courses"
+          style={{ textDecoration: "none", color: "slategrey" }}
+        >
+          COURSES
+        </Link>
+      </StyledLink>
     </NavWrapper>
   )
 }
