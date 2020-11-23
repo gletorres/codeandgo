@@ -12,6 +12,6 @@ export const ContainerWrapper = styled.div`
     grid-gap: 0 1rem;
   }
   @media ${props => props.theme.breakpoints.mobile} {
-    grid-template-columns: 1rem repeat(6, 1fr) 1rem;
+    grid-template-columns: 0.5rem repeat(6, 1fr) 0.5rem;
   }
 `
