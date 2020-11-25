@@ -29,7 +29,7 @@ const courses = ({ data }) => {
         <H1 textAlign="center" margin="0 0 1rem 0">
           THIS IS THE COURSES CONTENT
         </H1>
-        <P>This is where all the COURSES live</P>
+        <P>This is where all the COURSES live This is it is it it</P>
       </Content>
     </Container>
   )
