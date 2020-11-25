@@ -34,16 +34,12 @@ const main = ({ data }) => {
         <P>
           This is where all the codes or syntax live This is where all the codes
           or syntax live This is where all the codes or syntax live This is
-<<<<<<< HEAD
           where all the codes or syntax live This is where all the codes or
           syntax liveThis is where all the codes or syntax liveThis is where all
           the codes or syntax liveThis is where all the codes or syntax liveThis
           is where all the codes or syntax liveThis is where all the codes or
           syntax liveThis is where all the codes or syntax liveThis is where all
-          the codes or syntax live
-=======
-          where all the codes or syntax live
->>>>>>> e96b84a96bc0f29f85f59ba76a0383cb7a535810
+          the codes or syntax live where all the codes or syntax live
         </P>
       </Content>
     </Container>
