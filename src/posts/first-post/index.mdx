@@ -220,11 +220,7 @@ npm run develop
 
 - Check the image below for graphql.
 
-<<<<<<< HEAD
 ![Graphql mage](first-graphql-query.PNG)
-=======
-![Graphql mage](first-graphql-query.png)
->>>>>>> 2d829986549cd13fd3731a3777611853eb134259
 
 <p>
   If you see the graphql image above, your doing fine. We'll use graphql query
@@ -313,21 +309,12 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-<<<<<<< HEAD
 }
 body, html{
     font-family: ${props => props.theme.fonts.main};
     height: 100%;
     background-color: ${props => props.theme.colors.light1};
 }
-=======
-}
-body, html{
-    font-family: ${props => props.theme.fonts.main};
-    height: 100%;
-    background-color: ${props => props.theme.colors.light1};
-}
->>>>>>> 2d829986549cd13fd3731a3777611853eb134259
 `
 
 export const wrapRootElement = ({ element }) => (
@@ -382,19 +369,11 @@ query MyQuery {
   at the right of your query. Note that this is query for creating pages
   programmatically.
 </p>
-<<<<<<< HEAD
 
 - Create a js file at the root of your project folder and name it "gatsby-node.js". Inside this file paste the code you queried in the graphiql. Your code should look like the code below:
 
 `gatsby-node.js`
 
-=======
-
-- Create a js file at the root of your project folder and name it "gatsby-node.js". Inside this file paste the code you queried in the graphiql. Your code should look like the code below:
-
-`gatsby-node.js`
-
->>>>>>> 2d829986549cd13fd3731a3777611853eb134259
 ```js
 exports.createPages = async function ({ actions, graphql }) {
   const { data } = await graphql`
@@ -412,12 +391,5 @@ exports.createPages = async function ({ actions, graphql }) {
     }
   `
 ```
-<<<<<<< HEAD
 
 ### Creating Paginated Pages For Posts
-
-#### to be continued
-=======
-
-### Creating Paginated Pages For Posts
->>>>>>> 2d829986549cd13fd3731a3777611853eb134259
