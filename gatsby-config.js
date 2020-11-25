@@ -9,6 +9,22 @@ module.exports = {
     author: "Glenn Torres",
   },
   plugins: [
+    //added for browser icon
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `CodeAndGo`,
+        short_name: `CodeAndGo`,
+        start_url: `/`,
+        background_color: `#f7f0eb`,
+        theme_color: `#a2466c`,
+        display: `standalone`,
+        icon: `src/images/logo.png`,
+        icon_options: {
+          purpose: `any maskable`,
+        },
+      },
+    },
     {
       //gatsby source filesystem installed
       resolve: `gatsby-source-filesystem`,
