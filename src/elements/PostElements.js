@@ -124,6 +124,6 @@ hr{
 
   @media ${props => props.theme.breakpoints.mobile} {
     padding: ${props =>
-      `${props.theme.spacings.medium} ${props.theme.spacings.large}`};
+      `${props.theme.spacings.xSmall} ${props.theme.spacings.xSmall}`};
   }
 `

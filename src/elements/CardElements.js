@@ -6,4 +6,8 @@ export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: ${props => props.theme.colors.light1};
+  box-sizing: border-box;
+
+  box-shadow: ${props => props.theme.shadows.shadow1};
 `
