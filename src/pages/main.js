@@ -31,7 +31,16 @@ const main = ({ data }) => {
         <H1 textAlign="center" margin="0 0 1rem 0">
           THIS IS THE SYNTAX CONTENT
         </H1>
-        <P>This is where all the codes or syntax live</P>
+        <P>
+          This is where all the codes or syntax live This is where all the codes
+          or syntax live This is where all the codes or syntax live This is
+          where all the codes or syntax live This is where all the codes or
+          syntax liveThis is where all the codes or syntax liveThis is where all
+          the codes or syntax liveThis is where all the codes or syntax liveThis
+          is where all the codes or syntax liveThis is where all the codes or
+          syntax liveThis is where all the codes or syntax liveThis is where all
+          the codes or syntax live
+        </P>
       </Content>
     </Container>
   )
