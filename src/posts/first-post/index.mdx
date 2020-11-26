@@ -393,3 +393,246 @@ exports.createPages = async function ({ actions, graphql }) {
 ```
 
 ### Creating Paginated Pages For Posts
+
+<p>
+  In this section, we are going to create our paginated pages for our post. The
+  code below will be added to "gatsby-node.js" file.
+</p>
+
+`Just add this code inside the gatsby-node.js after the above code`
+
+```js
+const postPerPage = 3
+const numPages = Math.ceil(data.allMdx.edges.length / postPerPage)
+
+Array.from({ length: numPages }).forEach((_, i) => {
+  actions.createPages({
+    path: i === 0 ? `/` : `/${i + 1}`,
+    component: require.resolve("./src/templates/allPost.js"),
+    context: {
+      limit: postPerPage,
+      skip: i * postPerPage,
+      numPages,
+      currentPage: i + 1,
+    },
+  })
+})
+```
+
+- Create a sub-folder "elements" under source folder that will contain elements for every components that we are going to create in the "components" folder later in this lessons.
+
+- Inside the "elements folder" create a file called "ContainerElements.js" or any name you want with the same pattern to avoid confusions, write the code below inside this file:
+
+`ContainerElements.js`
+
+```js
+import styled from "styled-components"
+
+export const ContainerWrapper = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr repeat(12, minmax(auto, 4.2rem)) 1fr;
+  grid-template-rows: 7.8rem 20rem 5rem auto;
+  gap: 0 2rem;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    grid-template-columns: 2rem repeat(6, 1fr) 2rem;
+    grid-gap: 0 1rem;
+  }
+  @media ${props => props.theme.breakpoints.mobile} {
+    grid-template-columns: 0.5rem repeat(6, 1fr) 0.5rem;
+  }
+
+```
+
+- Don't forget to create an index.js so we can export our ContainerElements.js. This should be inside the "elements" folder with the ContainerElements.js.
+
+`index.js`
+
+```js
+export * from "./ContainerElements"
+```
+
+<p>
+  And that is the first export that we have inside our index.js, that means we
+  can use any elements inside that file by just importing it directly from the
+  subfolder called "elements"
+</p>
+
+- Now, create our "components" folder under the SRC folder where we can store every components that we are going to create in this tutorial.
+
+<p>
+  Let's start by adding a component called "Container.js", and the "index.js"
+  where we can export our Container.js file. This is the same steps when we
+  created the ContainerElements.js above.
+</p>
+
+- Just copy the code below to our "Container.js file below:
+
+`Container.js`
+
+```js
+import React from "react"
+import { ContainerWrapper } from "../elements"
+
+export const Container = ({ children }) => {
+  return <ContainerWrapper>{children}</ContainerWrapper>
+}
+```
+
+- Wait, don't forget to export our Container.js in our "index.js" under the "components" folder.
+  `index.js`
+
+```js
+export * from "./Container"
+```
+
+`Note that we have already created two index.js with a separate folder. The index.js inside the "elements" folder and the index.js inside the "components" folder.`
+
+<p>
+  Notice that the ContainerElements.js and the Container.js are directly
+  communicating each other.
+</p>
+
+- Instead of typing the complete path like:
+
+```js
+import ContainerElements from "./src/elements/ContainerElements"
+```
+
+- You can just import it directly like:
+
+```js
+import { ContainerWrapper } from "../elements"
+```
+
+- Now that we have the ContainerElements.js and the Container.js we can use, we can now import the Container.js to our new index.js which we are going to create inside the "pages" folder.
+
+`NOTE`
+
+<p>
+  "pages" folder was automatically generated when we first created our
+  "gatsby-starter-hello-world", if you don't see the "pages" folder, create one
+  under the "SRC" folder, and inside "pages" folder, again, add an "index.js"
+  file.
+</p>
+
+`index.js`
+
+```js
+import React from "react"
+import { Container } from "../components"
+
+const IndexPage = () => {
+  return (
+    <Container>
+      <h1>Hello World From Index Page</h1>
+    </Container>
+  )
+}
+export default IndexPage
+```
+
+### Navigation Component
+
+<p>
+  We are going to repeat the process as we did in the Container.js and the
+  ContainerElements.js.
+</p>
+
+- Create a file and name it "NavElements.js". This file will also put inside the "elements" folder along with the ContainerElements.js. Type the following code below:
+
+```js
+import styled from "styled-components"
+
+export const NavWrapper = styled.nav`
+  grid-column: 2 / span 12;
+  grid-row: 1 / 2;
+  display: flex;
+  align-items: center;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    grid-column: 2 / span 6;
+  }
+`
+```
+
+- Don't forget to export it in the "index.js" in the "elements" folder.
+
+`index.js`
+
+```js
+export * from "./ContainerElements"
+export * from "./NavElements"
+```
+
+- We now have two exports in our index.js inside our "elements" folder.
+
+- Head on to our "components" folder and create a file and name it as "Nav.js".
+
+`Nav.js`
+
+```js
+import React from "react"
+import { useStaticQuery, Link, graphql } from "gatsby"
+import { NavWrapper } from "../elements"
+
+export const Nav = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      logo: file(relativePath: { eq: "logo.png" }) {
+        publicURL
+      }
+    }
+  `)
+  return (
+    <NavWrapper>
+      <Link to="/">
+        <img src={data.logo.publicURL} alt="My Code Logo" />
+      </Link>
+    </NavWrapper>
+  )
+}
+```
+
+- Do not to forget to export "Nav.js" in our index.js under the "components" folder.
+
+`index.js`
+
+```js
+export * from "./Container"
+export * from "./Nav"
+```
+
+- We now have two exports in our index.js inside our "components" folder.
+
+- In the "Nav.js there several steps been made"
+
+  - Imported our NavWrapper directly from our NavElements.js to wrap our navigation.
+  - Created images folder under the SRC folder, where we can store our images.
+  - Added a our logo.png image for our logo.png from images folder.
+
+  - We named our query as "data"
+  - We imported Link, useStaticQuery, and graphql from gatsby
+
+<p>
+  We've done the Navigation part, we can now import/add it to our
+  "Container.js", we can now pass the Nav inside our Container.
+</p>
+
+`Container.js`
+
+```js
+import React from "react"
+import { ContainerWrapper } from "../elements"
+import { Nav } from "../components"
+
+export const Container = ({ children }) => {
+  return (
+    <ContainerWrapper>
+      <Nav />
+      {children}
+    </ContainerWrapper>
+  )
+}
+```

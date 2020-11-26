@@ -1,22 +1,3 @@
-// import React from "react"
-// import { ContainerWrapper } from "../elements"
-// import { Nav, Footer } from "../components"
-// import { H1, P, ContentWrapper, PostWrapper } from "../elements"
-
-//  const main = ({ children }) => {
-//   return (
-//     <ContentWrapper>
-//       <Nav />
-//       <ContainerWrapper>
-//         <PostWrapper>{children}</PostWrapper>
-//       </ContainerWrapper>
-//       <Footer />
-//     </ContentWrapper>
-//   )
-// }
-
-// export default main
-
 import React from "react"
 import { graphql } from "gatsby"
 import { Container, Content, FeatureImage } from "../components"
