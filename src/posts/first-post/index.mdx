@@ -3,7 +3,7 @@ title: Building A Gatsby Blog Site With MDX And Graphql
 slug: Building-A-Gatsby-Blog-Site-With-MDX-And-Graphql
 date: 2020-03-21
 featureImage: gatsby-mdx-graphql-blog.png
-excerpt: It’s been a while since I started web development. In this article, I will explain how I started coding, from making a single basic component to complex components, breaking complex code into a single piece of components to render a single file into the browser and other stuff.
+excerpt: It’s been a while since I started web development. In this article, I will explain how I started coding, from making a single basic component to complex components, breaking complex code into a single pieces of components to render a single file into the browser and other stuff.
 ---
 
 ## Preparing Local Environment
@@ -636,3 +636,1242 @@ export const Container = ({ children }) => {
   )
 }
 ```
+
+### The Footer
+
+<p>Let's create our footer elements</p>
+
+- Create a js file and name it "FooterElements.js" in our subfolder "elements" same as the above steps. Inside "FooterElements.js" copy and paste the code below:
+
+`FooterElements.js`
+
+```js
+import styled from "styled-components"
+
+export const FooterWrapper = styled.footer`
+  grid-column: 2 / span 12;
+  min-height: 11.25rem;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  @media ${props => props.theme.breakpoints.tablet}{
+      grid-column 2 / span 6;
+  }
+`
+export const FooterSocialWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+
+  & p {
+    text-align: center;
+    flex: 0 0 100%;
+  }
+`
+export const FooterSocialIcons = styled.div`
+  flex: 0 0 100%;
+  margin-bottom: 2rem;
+
+  & img {
+    height: 22px;
+    padding: 0 1rem;
+    transition: filter 0.3s ease;
+  }
+  & img:hover,
+  img:focus {
+    height: 24px;
+    filter: brightness(60%);
+  }
+`
+```
+
+- Don't forget forget to add an export in the index.js file.
+
+`index.js` in the "elements" folder
+
+```js
+export * from "./ContainerElements"
+export * from "./NavElements"
+export * from "./FooterElements"
+```
+
+- Create a file in the "components" folder called "Footer", that's very straight forward. Copy the code below:
+
+`Notice that I already added some Social Icons in the images folder, and this social icons elements was already added inside the "FooterElements.js" called "FooterSocialIcons" and we passes this elements in the "Footer.js in the components folder"`
+
+`Footer.js`
+
+```js
+import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import {
+  FooterWrapper,
+  FooterSocialWrapper,
+  FooterSocialIcons,
+} from "../elements"
+
+export const Footer = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      facebook: file(relativePath: { eq: "facebook.svg" }) {
+        publicURL
+      }
+      linkedin: file(relativePath: { eq: "linkedin.svg" }) {
+        publicURL
+      }
+      twitter: file(relativePath: { eq: "twitter.svg" }) {
+        publicURL
+      }
+      youtube: file(relativePath: { eq: "youtube.svg" }) {
+        publicURL
+      }
+    }
+  `)
+  return (
+    <FooterWrapper>
+      <FooterSocialWrapper>
+        <FooterSocialIcons>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener norefferer"
+          >
+            <img src={data.facebook.publicURL} alt="Facebook logo" />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener norefferer"
+          >
+            <img src={data.linkedin.publicURL} alt="Linkedin logo" />
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener norefferer"
+          >
+            <img src={data.twitter.publicURL} alt="Twitter logo" />
+          </a>
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener norefferer"
+          >
+            <img src={data.youtube.publicURL} alt="Youtube logo" />
+          </a>
+        </FooterSocialIcons>
+      </FooterSocialWrapper>
+    </FooterWrapper>
+  )
+}
+```
+
+- Don't forget to add an export inside the index.js in the "components" folder.
+
+### Responsive Images
+
+`Same steps as the above`
+
+- Add a new file called "ImageElements.js" inside the elements folder, and don't forget add an export in the element's index.js.
+
+<p>Do the same in the components folder.</p>{" "}
+
+- Add a new file called "FeatureImage.js" inside the "components" folder, and don't forget to add an export in the components's index.js.
+
+- Stop your development server and install the image plugin from gatsby.
+
+`Install`
+
+```js
+npm i gatsby-image
+```
+
+- Again, run your development server. If successful, click the http://localhost:8000/\_\_\_graphql, enter and play the following below.
+
+`Start by selecting imageSharp-fixed-original name-name of the image.`
+
+-please refer to the image below:
+
+![Graphql mage](image-sharp.PNG)
+
+- Or, just copy the following code in your "FeatureImage.js" in the components folder:
+
+`FeatureImage.js`
+
+```js
+import React from "react"
+import Img from "gatsby-image"
+import { useStaticQuery, graphql } from "gatsby"
+import { FeatureImageWrapper } from "../elements"
+
+export const FeatureImage = ({ fixed }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      imageSharp(fixed: { originalName: { eq: "codeko.jpg" } }) {
+        fixed {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+  `)
+
+  return (
+    <FeatureImageWrapper>
+      <Img
+        fixed={fixed ? fixed : data.imageSharp.fixed}
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: "100%",
+          height: "100%",
+        }}
+      />
+    </FeatureImageWrapper>
+  )
+}
+```
+
+- add an image in the images folder for this line of code to work. For example in the above query imageSharp(fixed: { originalName: { eq: "codeko.jpg" } })
+
+- Copy the code below to ImageElements.js
+
+`ImageElements.js`
+
+```js
+import styled from "styled-components"
+
+export const FeatureImageWrapper = styled.div`
+  grid-column: 3 / span 10;
+  grid-row: 2 / 4;
+  overflow: hidden;
+  position: relative;
+
+  @media ${props => props.theme.breakpoints.tablet} grid-column: 2 /span 6;
+`
+```
+
+### Content Component
+
+- Add the following files to elements folder:
+
+  - CardElements.js
+  - ButtonElements.js
+
+- Add the following files to components folder:
+
+  - ContentCard.js
+  - Button.js
+
+- Add this code to the following files we created:
+
+`CardElements.js`
+
+```js
+import styled from "styled-components"
+
+export const CardWrapper = styled.div`
+  margin-top: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+```
+
+`ContentCard.js`
+
+```js
+import styled from "styled-components"
+
+export const ContentWrapper = styled.main`
+  grid-column: 4 / span 8;
+  grid-row: 3 / span 5;
+  background-color: ${props => props.theme.colors.light2};
+  padding: ${props =>
+    `${props.theme.spacings.xLarge} ${props.theme.spacings.xxLarge}`};
+  box-shadow: ${props => props.theme.shadows.shadow2};
+  x-index: 10;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    grid-column: 2 / span 6;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    padding: ${props =>
+      `${props.theme.spacings.medium} ${props.theme.spacings.large}`};
+  }
+`
+```
+
+`Button.js`
+
+```js
+import React from "react"
+import { ButtonWrapper } from "../elements"
+
+export const Button = ({ children, href }) => {
+  return <ButtonWrapper to={href}>{children}</ButtonWrapper>
+}
+```
+
+`ButtonElements.js`
+
+```js
+import React from "react"
+import styled from "styled-components"
+import { Link } from "gatsby"
+
+export const ButtonWrapper = styled(props => <Link {...props} />)`
+  padding: 0.5rem 0.75rem;
+  background-color: ${props => props.theme.colors.main1};
+  border-radius: 0.5rem;
+  color: ${props => props.theme.colors.light1};
+  font-weight: 700;
+  font-size: 0.875rem;
+  width: fit-content;
+  transition: filter 0.3s ease;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    filter: brightness(110%);
+  }
+`
+```
+
+### Pagination Component
+
+<p>And, as usual we need to create an element for Pagination component.</p>
+
+- Add a file PaginationElements.js in the "elements" folder and add the following code below.
+
+`PaginationElements.js`
+
+```js
+import React from "react"
+import styled from "styled-components"
+import { Link } from "gatsby"
+
+export const PaginationWrapper = styled.div`
+  grid-column: 2 / span 12;
+  padding: 3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a:nth-child(1) {
+    color: ${props =>
+      props.isFirst ? props.theme.colors.dark3 : props.theme.colors.dark1};
+    ponter-events: ${props => (props.isFirst ? "none" : "auto")};
+
+    cursor: ${props => (props.isFirst ? "default" : "pointer")};
+  }
+
+  a:nth-child(2) {
+    color: ${props =>
+      props.isLast ? props.theme.colors.dark3 : props.theme.colors.dark1};
+    ponter-events: ${props => (props.isLast ? "none" : "auto")};
+
+    cursor: ${props => (props.isLast ? "default" : "pointer")};
+  }
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    grid-column: 2 / span 6;
+  }
+`
+export const PaginationElement = styled(props => <Link {...props} />)`
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  font-weight: 400;
+  text-decoration: none;
+  margin: 0 2rem;
+
+  &:hover,
+  &focus {
+    text-decoration: underline;
+  }
+`
+```
+
+- Add export in the index.js
+
+- For our Pagination component
+
+`Pagination.js`
+
+```js
+import React from "react"
+import { PaginationWrapper, PaginationElements } from "../elements"
+
+export const Pagination = ({ isFirst, isLast, prevPage, nextPage }) => {
+  return (
+    <PaginationWrapper isFirst={isFirst} isLast={isLast}>
+      <PaginationElements to={prevPage}>Previous Page</PaginationElements>
+      <PaginationElements to={nextPage}>Next Page</PaginationElements>
+    </PaginationWrapper>
+  )
+}
+```
+
+- Add export in the index.js
+
+### Pagination Pages Template
+
+- Create a sub-folder "template" in our SRC folder
+
+- Add a file "allPosts.js" inside the "template" folder.
+
+- No need to add export in the index file.
+
+- Played a query in our graphiql, if you want to see the output for this query, go ahead and copy the file below and run it on your graphiql.
+
+```js
+allMdx(
+      sort: { fields: frontmatter___date, order: DESC }
+      skip: $skip //changed it from 3 to $$skip
+      limit: $limit //change it from 3 to variable $limit
+    ) {
+      edges {
+        node {
+          frontmatter {
+            slug
+            title
+            date(formatString: "MMMM DD, YYYY")
+            excerpt
+          }
+        }
+      }
+    }
+  }
+`
+```
+
+<p>Your entire code inside "allPosts.js" should look like this:</p>
+
+```js
+import React from "react"
+import { graphql } from "gatsby"
+
+import {
+  Container,
+  Content,
+  ContentCard,
+  FeatureImage,
+  Pagination,
+} from "../components"
+import { H1, P } from "../elements"
+
+const allPosts = ({ pageContext, data }) => {
+  const { currentPage, numPages } = pageContext
+  const isFirst = currentPage === 1
+  const isLast = currentPage === numPages
+  const prevPage = currentPage - 1 === 1 ? "/" : `/${currentPage - 1}`
+  const nextPage = `/${currentPage + 1}`
+  const posts = data.allMdx.edges
+
+  return (
+    <Container>
+      <FeatureImage />
+      <Content>
+        <H1 textAlign="center" margin="0 0 1rem 0">
+          Become a better javascript developer
+        </H1>
+        <P color="dark2" textAlign="center">
+          THIS IS MY WAY OF LEARNING NEW STUFF ABOUT WEB DEVELOPMENT. WIRITNG A
+          BLOGPOSTS.
+        </P>
+        {posts.map(post => (
+          <ContentCard
+            key={post.node.frontmatter.slug}
+            date={post.node.frontmatter.date}
+            title={post.node.frontmatter.title}
+            excerpt={post.node.frontmatter.excerpt}
+            slug={post.node.frontmatter.slug}
+          />
+        ))}
+      </Content>
+
+      <Pagination
+        isFirst={isFirst}
+        isLast={isLast}
+        prevPage={prevPage}
+        nextPage={nextPage}
+      />
+    </Container>
+  )
+}
+export default allPosts
+
+export const pageQuery = graphql`
+  query AllPostsQuery($skip: Int!, $limit: Int!) {
+    allMdx(
+      sort: { fields: frontmatter___date, order: DESC }
+      skip: $skip
+      limit: $limit
+    ) {
+      edges {
+        node {
+          frontmatter {
+            slug
+            title
+            date(formatString: "MMMM DD, YYYY")
+            excerpt
+          }
+        }
+      }
+    }
+  }
+`
+```
+
+### Individual Post Components
+
+- Add a file in the "elements" folder and name it "PostElements.js"
+
+- Never forget to add export in your index.js
+
+- Copy this code below:
+
+`PostElements.js`
+
+```js
+import styled from "styled-components"
+
+export const ContentWrapper = styled.main`
+  grid-column: 4 / span 8;
+  grid-row: 4 / span 6;
+  background-color: ${props => props.theme.colors.light2};
+  padding: ${props =>
+    `${props.theme.spacings.xLarge} ${props.theme.spacings.xxLarge}`};
+  box-shadow: ${props => props.theme.shadows.shadow1};
+  x-index: 10;
+
+  @media ${props => props.theme.breakpoints.tablet} {
+    grid-column: 2 / span 6;
+  }
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    padding: ${props =>
+      `${props.theme.spacings.medium} ${props.theme.spacings.large}`};
+  }
+`
+```
+
+`Post.js`
+
+```js
+import { PostWrapper } from "../elements"
+
+export const Post = ({ children }) => {
+  return <PostWrapper>{children}</PostWrapper>
+}
+```
+
+- Never forget to add export to your index.js
+
+### SinglePost Template For Individual Post
+
+- In your gatsby-node.js file, add these line of code.
+
+```js
+  //Create single blogposts
+  data.allMdx.edges.forEach(edge => {
+    const slug = edge.node.frontmatter.slug
+    const id = edge.node.id
+    actions.createPage({
+      path: slug,
+      component: require.resolve(`./src/templates/singlePost.js`),
+      context: { id },
+    })
+  }
+```
+
+<p>Your entire gatsby-node.js file should look like this</p>
+
+```js
+exports.createPages = async function ({ actions, graphql }) {
+  const { data } = await graphql(`
+    query {
+      allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+        edges {
+          node {
+            frontmatter {
+              slug
+            }
+            id
+          }
+        }
+      }
+    }
+  `)
+
+  //Create paginated pages for posts
+
+  const postPerPage = 3
+  const numPages = Math.ceil(data.allMdx.edges.length / postPerPage)
+
+  Array.from({ length: numPages }).forEach((_, i) => {
+    actions.createPage({
+      path: i === 0 ? `/` : `/${i + 1}`,
+      component: require.resolve("./src/templates/allPosts.js"),
+      context: {
+        limit: postPerPage,
+        skip: i * postPerPage,
+        numPages,
+        currentPage: i + 1,
+      },
+    })
+  })
+
+  //Create single blogposts
+  data.allMdx.edges.forEach(edge => {
+    const slug = edge.node.frontmatter.slug
+    const id = edge.node.id
+    actions.createPage({
+      path: slug,
+      component: require.resolve(`./src/templates/singlePost.js`),
+      context: { id },
+    })
+  })
+}
+```
+
+- Create another file inside the template folder and name it "singlePost.js"
+
+- Install a plugin from the Gatsby plugin:
+
+```js
+npm install gatsby-plugin-mdx @mdx-js/mdx @mdx-js/react
+```
+
+- Inside the singlePost.js
+
+`singlePost.js`
+
+```js
+import React from "react"
+import { graphql } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { H1 } from "../elements"
+import { Container, Post, FeatureImage } from "../components"
+
+const singlePost = ({ data }) => {
+  const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.fixed
+
+  return (
+    <Container>
+      <FeatureImage fixed={featureImage} />
+      <Post>
+        <H1 margin="0 0 2rem 0">{data.mdx.frontmatter.title}</H1>
+        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+      </Post>
+    </Container>
+  )
+}
+
+export default singlePost
+
+export const pageQuery = graphql`
+  query SinglePostQuery($id: String!) {
+    mdx(id: { eq: $id }) {
+      body
+      frontmatter {
+        date
+        excerpt
+        slug
+        title
+        featureImage {
+          childImageSharp {
+            fixed {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+      }
+    }
+  }
+`
+```
+
+### Markdown Styles
+
+- Create a sub-folder "posts" with s under the Src folder
+
+- Create a files inside the posts folder and name it "first-post.mdx", second-post.mdx and so on.
+
+- Inside the .mdx file let say "first-post.mdx"
+
+`first-post.mdx`
+
+```js
+---
+title: My fourth post
+slug: my-fourth-post
+date: 2020-03-24
+featureImage: nature-fourth-post.jpg
+excerpt: It’s been a while since I started web development. In this article, I will explain how I started coding, from making a single basic component to complex components, breaking complex code into a single piece of components to render a single file into the browser and other stuff.
+---
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+
+**THIS IS BOLD because of the two asterisk on both side**
+
+1. First item
+2. Second item
+3. Third item
+
+- First item
+- Second item
+- Third item
+
+  Here's a sentence with a footnote. [^1]
+
+[^1]: This is the footnote.
+
+```
+
+> [Check the markdownguide here](https://www.markdownguide.org/basic-syntax/)
+
+- Go to your gatsby-browser.js
+
+- Your code should look like this:
+
+```js
+import React from "react"
+import { createGlobalStyle, ThemeProvider } from "styled-components"
+import { MDXProvider } from "@mdx-js/react"
+import Theme from "./src/themes/theme"
+
+const GlobalStyles = createGlobalStyle`
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body, html{
+    font-family: ${props => props.theme.fonts.main};
+    height: 100%;
+    background-color: ${props => props.theme.colors.light1};
+}
+`
+
+export const wrapRootElement = ({ element }) => (
+  //for MDXProvider
+  <MDXProvider components={components}>
+    <ThemeProvider theme={Theme}>
+      <GlobalStyles />
+      {element}
+    </ThemeProvider>
+  </MDXProvider>
+)
+```
+
+`NOTE`
+
+- Copy all the file from gatsby-browser.js and paste it in the gatsby-ssr.js.
+
+### Syntax Highlighter
+
+<p>
+  This is the part where we create a code for our syntax highlighter. If you are
+  able to copy the code that is shown in this blog that means, this blog uses a
+  syntac highlighting where it can show the code that you want to show on your
+  blog post.
+</p>
+
+- Install
+
+```js
+npm i prism-react-renderer mdx-utils
+```
+
+- Add a file inside the components folder and name it "Code.js"
+
+- Don't forget to add export in the index.js
+
+- Inside the Code.js
+
+`Code.js`
+
+```js
+import React from "react"
+import Highlight, { defaultProps } from "prism-react-renderer"
+import theme from "prism-react-renderer/themes/vsDark"
+
+export const Code = ({ codeString, language, ...props }) => {
+  return (
+    <Highlight
+      {...defaultProps}
+      theme={theme}
+      code={codeString}
+      language={language}
+    >
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <div className="gatsby-highlight" data-language={language}>
+          <pre className={className} style={style}>
+            {tokens.map((line, i) => (
+              <div {...getLineProps({ line, key: i })}>
+                {line.map((token, key) => (
+                  <span {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        </div>
+      )}
+    </Highlight>
+  )
+}
+```
+
+- We need to create a separate CSS file at the root of our application folder for our Code.js syntax hightlighting styles.
+
+This css code for syntax hightlighting was copied from lekoarts blog
+
+> [Check the blog here](https://www.lekoarts.de/en/blog/adding-line-numbers-and-code-highlighting-to-mdx-code-blocks)
+
+`language-tab.css`
+
+```css
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+.prism-code {
+  font-size: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  background-color: transparent;
+  overflow: initial;
+}
+
+.token {
+  display: inline-block;
+}
+
+p > code,
+li > code {
+  background: rgb(1, 22, 39);
+  color: rgb(214, 222, 235);
+  padding: 0.4em 0.3rem;
+}
+
+.gatsby-highlight {
+  font-size: 1rem;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+}
+
+gatsby-highlight > code[class*="language-"],
+.gatsby-highlight > pre[class*="language-"] {
+  word-spacing: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  line-height: 1.5;
+  tab-size: 4;
+  hyphens: none;
+}
+
+.line-number-style {
+  display: inline-block;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 1.2em;
+  user-select: none;
+  opacity: 0.3;
+  text-align: center;
+  position: relative;
+}
+
+.highlight-line {
+  background-color: rgb(2, 55, 81);
+  border-left: 4px solid rgb(2, 155, 206);
+}
+
+.highlight-line .line-number-style {
+  opacity: 0.5;
+  width: calc(1.2em - 4px);
+  left: -2px;
+}
+```
+
+- Modify your gatsby-browser.js and gatsby-ssr.js code below:
+
+`gatsby-browser.js and gatsby-ssr.js`
+
+```js
+import React from "react"
+import { createGlobalStyle, ThemeProvider } from "styled-components"
+import { MDXProvider } from "@mdx-js/react"
+import { preToCodeBlock } from "mdx-utils"
+import Theme from "./src/themes/theme"
+import { Code } from "./src/components"
+import "./language-tabs.css"
+
+const GlobalStyles = createGlobalStyle`
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body, html{
+    font-family: ${props => props.theme.fonts.main};
+    height: 100%;
+    background-color: ${props => props.theme.colors.light1};
+}
+`
+
+const components = {
+  pre: preProps => {
+    const props = preToCodeBlock(preProps)
+    if (props) {
+      return <Code {...props} />
+    }
+    return <pre {...preProps} />
+  },
+  wrapper: ({ children }) => <>{children}</>,
+}
+
+export const wrapRootElement = ({ element }) => (
+  //for MDXProvider
+  <MDXProvider components={components}>
+    <ThemeProvider theme={Theme}>
+      <GlobalStyles />
+      {element}
+    </ThemeProvider>
+  </MDXProvider>
+)
+```
+
+### 404
+
+- Create a file at the root of your application folder and name it "404.js"
+
+- Inside the 404.js:
+
+```js
+import React from "react"
+import { graphql } from "gatsby"
+import { Container, Content, FeatureImage } from "../components"
+import { H1 } from "../elements"
+
+const notFound = ({ data }) => {
+  const featureImage = data.imageSharp.fixed
+  return (
+    <Container>
+      <FeatureImage fixed={featureImage} />
+      <Content>
+        <H1 textAlign="center" margin="0 0 1rem 0">
+          Uh oh.. Cannot be found.{" "}
+        </H1>
+      </Content>
+    </Container>
+  )
+}
+
+export default notFound
+
+export const notFoundQuery = graphql`
+  query NotFoundQuery {
+    imageSharp(fixed: { originalName: { eq: "logo.png" } }) {
+      fixed {
+        ...GatsbyImageSharpFixed
+      }
+    }
+  }
+`
+```
+
+### SEO Component
+
+- Add a file and name it Seo.js.
+- Don't forget to add export in the index.js
+- Install the React Helmet first
+
+```js
+npm i react-helmet
+```
+
+- Add the following code below:
+
+`Seo.js`
+
+```js
+import React from "react"
+import { Helmet } from "react-helmet"
+import { StaticQuery, graphql } from "gatsby"
+
+export const Seo = ({ description, keywords, title, image, url, author }) => {
+  return (
+    <StaticQuery
+      query={detailsQuery}
+      render={data => {
+        const metaDescription = description || data.site.siteMetadata.desription
+        const metaTitle = title || data.site.siteMetadata.title
+        const metaAuthor = author || data.site.siteMetadata.author
+        const metaUrl = url || data.site.siteMetadata.url
+        const metaImage = image || data.site.siteMetadata.image
+        const metaKeywords = keywords || [
+          "code syntax",
+          "codeandgo courses",
+          "code and go web development",
+        ]
+        return (
+          <Helmet
+            title={title}
+            meta={[
+              {
+                name: `description`,
+                content: metaDescription,
+              },
+              {
+                property: `og:title`,
+                content: metaTitle,
+              },
+              {
+                property: `og:description`,
+                content: metaDescription,
+              },
+
+              {
+                property: `og:type`,
+                content: `website`,
+              },
+              {
+                property: `og:image`,
+                content: metaImage,
+              },
+
+              {
+                property: `og:url`,
+                content: metaUrl,
+              },
+              {
+                name: `twitter:card`,
+                content: `summary_large_image`,
+              },
+              {
+                name: `twitter:creator`,
+                content: metaAuthor,
+              },
+              {
+                name: `twitter:title`,
+                content: metaTitle,
+              },
+              {
+                name: `twitter: description`,
+                content: metaDescription,
+              },
+              {
+                name: `twitter:image`,
+                content: metaImage,
+              },
+            ].concat(
+              metaKeywords && metaKeywords.lenght > 0
+                ? {
+                    name: `keywords`,
+                    content: metaKeywords.join(`, `),
+                  }
+                : []
+            )}
+          />
+        )
+      }}
+    />
+  )
+}
+const detailsQuery = graphql`
+  query DefaultSEOQuery {
+    site {
+      siteMetadata {
+        title
+        description
+        author
+        image
+      }
+    }
+  }
+`
+```
+
+- Modify the following js file for Seo
+
+`singlePost.js`
+
+```js
+import React from "react"
+import { graphql } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import { H1 } from "../elements"
+import { Container, Post, FeatureImage, Seo } from "../components"
+
+const singlePost = ({ data }) => {
+  const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.fixed
+
+  //SEO DOWN
+  const seoImage = data.mdx.frontmatter.featureImage.publicURL
+
+  return (
+    <Container>
+      <Seo
+        title={data.mdx.frontmater.title}
+        image={seoImage}
+        description={data.mdx.frontmatter.excerpt}
+      />
+      {/* SEO */}
+      <FeatureImage fixed={featureImage} />
+      <Post>
+        <H1 margin="0 0 2rem 0">{data.mdx.frontmatter.title}</H1>
+        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+      </Post>
+    </Container>
+  )
+}
+
+export default singlePost
+
+export const pageQuery = graphql`
+  query SinglePostQuery($id: String!) {
+    mdx(id: { eq: $id }) {
+      body
+      frontmatter {
+        date
+        excerpt
+        slug
+        title
+        featureImage {
+          publicURL
+          childImageSharp {
+            fixed {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+      }
+    }
+  }
+`
+```
+
+`allPost.js`
+
+```js
+import React from "react"
+import { graphql } from "gatsby"
+
+import {
+  Container,
+  Content,
+  ContentCard,
+  FeatureImage,
+  Pagination,
+  Seo,
+} from "../components"
+import { H1, P } from "../elements"
+
+const allPosts = ({ pageContext, data }) => {
+  const { currentPage, numPages } = pageContext
+  const isFirst = currentPage === 1
+  const isLast = currentPage === numPages
+  const prevPage = currentPage - 1 === 1 ? "/" : `/${currentPage - 1}`
+  const nextPage = `/${currentPage + 1}`
+  const posts = data.allMdx.edges
+
+  return (
+    <Container>
+      <Seo />
+      <FeatureImage />
+      <Content>
+        <H1 textAlign="center" margin="0 0 1rem 0">
+          Become a better javascript developer
+        </H1>
+        <P color="dark2" textAlign="center">
+          THIS IS MY WAY OF LEARNING NEW STUFF ABOUT WEB DEVELOPMENT. WIRITNG A
+          BLOGPOSTS.
+        </P>
+        {posts.map(post => (
+          <ContentCard
+            key={post.node.frontmatter.slug}
+            date={post.node.frontmatter.date}
+            title={post.node.frontmatter.title}
+            excerpt={post.node.frontmatter.excerpt}
+            slug={post.node.frontmatter.slug}
+          />
+        ))}
+      </Content>
+
+      <Pagination
+        isFirst={isFirst}
+        isLast={isLast}
+        prevPage={prevPage}
+        nextPage={nextPage}
+      />
+    </Container>
+  )
+}
+export default allPosts
+
+export const pageQuery = graphql`
+  query AllPostsQuery($skip: Int!, $limit: Int!) {
+    allMdx(
+      sort: { fields: frontmatter___date, order: DESC }
+      skip: $skip
+      limit: $limit
+    ) {
+      edges {
+        node {
+          frontmatter {
+            slug
+            title
+            date(formatString: "MMMM DD, YYYY")
+            excerpt
+          }
+        }
+      }
+    }
+  }
+`
+```
+
+### Deploying To Netlify
+
+`Created new REPO on Github`
+
+- select without README or non of the check box ticked
+- click create REPO
+- follow the INSTRUCTIONS.
+- iT is important to GIT INIT first before commiting
+- Followe the first block of instructions
+- after the succesful push for the first commit
+
+`next pushing should be`
+
+- git add .
+- git commit -m "comments here"
+- git push origin main (master has been removed to get rid of slavery)
+- Please check my blog on how to deploy your web application to Netlify
+
+## That's all folks!
