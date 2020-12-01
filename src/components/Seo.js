@@ -68,7 +68,7 @@ export const Seo = ({ description, keywords, title, image, url, author }) => {
                 content: metaImage,
               },
             ].concat(
-              metaKeywords && metaKeywords.lenght > 0
+              metaKeywords && metaKeywords.length > 0
                 ? {
                     name: `keywords`,
                     content: metaKeywords.join(`, `),

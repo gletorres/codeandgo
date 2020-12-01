@@ -25,11 +25,17 @@ const allPosts = ({ pageContext, data }) => {
       <FeatureImage />
       <Content>
         <H1 textAlign="center" margin="0 0 1rem 0">
-          Become a better javascript developer
+          Become A Better Web Developer
         </H1>
         <P color="dark2" textAlign="center">
-          THIS IS MY WAY OF LEARNING NEW STUFF ABOUT WEB DEVELOPMENT. WIRITNG A
-          BLOGPOSTS.
+          In this section, I write a blog posts about all the syntax or
+          libraries I used to every project. Let say for example "Building a
+          blog with MDX-gatsby-graphql", MDX is part of the title, it's means
+          that there is also a basic explaination about MDX within blogpost
+          section or within a blogpost itself. I don't have to write everything
+          about MDX because there is a specific website that explains everything
+          about MDX and I will make sure to reference it or include a link
+          within a post.
         </P>
         {posts.map(post => (
           <ContentCard
