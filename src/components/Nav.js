@@ -13,7 +13,7 @@ export const Nav = () => {
   return (
     <NavWrapper>
       <Link to="/">
-        <img src={data.logo.publicURL} alt="My Code Logo" />
+        <img src={data.logo.publicURL} alt="codeandgo" />
       </Link>
 
       <Link
@@ -22,7 +22,6 @@ export const Nav = () => {
         style={{
           textDecoration: "none",
           color: "slategrey",
-          padding: "20px",
           fontSize: "20px",
         }}
       >
@@ -35,7 +34,6 @@ export const Nav = () => {
         style={{
           textDecoration: "none",
           color: "slategrey",
-          padding: "20px",
           fontSize: "20px",
         }}
       >
@@ -48,7 +46,6 @@ export const Nav = () => {
         style={{
           textDecoration: "none",
           color: "slategrey",
-          padding: "20px",
           fontSize: "20px",
         }}
       >

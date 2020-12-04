@@ -61,7 +61,7 @@ export const P = styled.p`
 `
 export const H1 = styled.h1`
   font-size: 2.25rem;
-  ling-height: 2.5rem;
+  line-height: 2.5rem;
 
   color: ${props => {
     switch (props.color) {
@@ -75,6 +75,10 @@ export const H1 = styled.h1`
         return props.theme.colors.light1
       case "light2":
         return props.theme.colors.light2
+      case "light3":
+        return props.theme.colors.light3
+      case "light4":
+        return props.theme.colors.light4
       default:
         return props.theme.colors.dark1
     }
@@ -86,7 +90,7 @@ export const H1 = styled.h1`
 `
 export const H2 = styled.h2`
   font-size: 1.5rem;
-  ling-height: 1.875rem;
+  line-height: 1.875rem;
 
   color: ${props => {
     switch (props.color) {
@@ -100,6 +104,10 @@ export const H2 = styled.h2`
         return props.theme.colors.light1
       case "light2":
         return props.theme.colors.light2
+      case "light3":
+        return props.theme.colors.light3
+      case "light4":
+        return props.theme.colors.light4
       default:
         return props.theme.colors.dark1
     }

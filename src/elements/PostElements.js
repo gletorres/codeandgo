@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const PostWrapper = styled.main`
   grid-column: 4 / span 8;
   grid-row: 4 / span 6;
-  background-color: ${props => props.theme.colors.light2};
+  background-color: ${props => props.theme.colors.dark2};
   padding: ${props =>
     `${props.theme.spacings.xLarge} ${props.theme.spacings.xxLarge}`};
   box-shadow: ${props => props.theme.shadows.shadow1};
@@ -15,7 +15,7 @@ export const PostWrapper = styled.main`
   h4,
   h5,
   h6 {
-    color: ${props => props.theme.colors.dark1};
+    color: ${props => props.theme.colors.light1};
   }
 
   h1:not(:first-child),
@@ -62,7 +62,7 @@ export const PostWrapper = styled.main`
 font-size: 1.125rem;
 line-height: 1.875;
 font-weight: 400;
-color: ${props => props.theme.colors.dark2};
+color: ${props => props.theme.colors.light1};
 margin-top: 2rem;
   }
 
@@ -92,7 +92,7 @@ blockquote p {
 }
 
 ul, ol{
-  color: ${props => props.theme.colors.dark2};
+  color: ${props => props.theme.colors.light1};
   margin: 1rem 0 1rem 2rem
 }
 li{
@@ -104,7 +104,7 @@ code {
   font-family: ${props => props.theme.fonts.code};
   font-size: 1rem;
   line-height: 1.875rem;
-  color: ${props => props.theme.colors.light1};
+  color: ${props => props.theme.colors.light2};
   background-color: ${props => props.theme.colors.dark3};
   padding: 0 0.3rem;
 }
@@ -112,7 +112,7 @@ code {
 hr{
   border: 0;
   height: 1px;
-  background: ${props => props.theme.colors.dark1};
+  background: ${props => props.theme.colors.light1};
   opacity: 0.1:
   margin-top: 2rem;
   
@@ -123,7 +123,9 @@ hr{
   }
 
   @media ${props => props.theme.breakpoints.mobile} {
-    padding: ${props =>
-      `${props.theme.spacings.xSmall} ${props.theme.spacings.xSmall}`};
+  
+    background-color: ${props => props.theme.colors.dark1};
+       padding: ${props =>
+         `${props.theme.spacings.xSmall} ${props.theme.spacings.xSmall}`};  
   }
 `

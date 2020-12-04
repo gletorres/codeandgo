@@ -3,7 +3,8 @@ import styled from "styled-components"
 export const ContentWrapper = styled.main`
   grid-column: 4 / span 8;
   grid-row: 4 / span 6;
-  background-color: ${props => props.theme.colors.light2};
+
+  background-color: ${props => props.theme.colors.dark1};
   padding: ${props =>
     `${props.theme.spacings.xLarge} ${props.theme.spacings.xxLarge}`};
   box-shadow: ${props => props.theme.shadows.shadow1};
@@ -15,6 +16,7 @@ export const ContentWrapper = styled.main`
 
   @media ${props => props.theme.breakpoints.mobile} {
     padding: ${props =>
-      `${props.theme.spacings.xxSmall} ${props.theme.spacings.xxSmall}`};
+      `
+      ${props.theme.spacings.xxSmall} ${props.theme.spacings.xxSmall}`};
   }
 `

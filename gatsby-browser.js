@@ -13,11 +13,12 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
 }
 body, html{
-    color: ${props => props.theme.fonts.light4};
+  
     font-family: ${props => props.theme.fonts.main};
     height: 100%;
     background: ${props => props.theme.colors.dark2};
 }
+
 `
 
 const components = {

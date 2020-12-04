@@ -1,20 +1,3 @@
-// import React from "react"
-// import { ContainerWrapper } from "../elements"
-// import { Nav, Footer } from "../components"
-// import { H1, P, ContentWrapper } from "../elements"
-
-// export const courses = ({ children }) => {
-//   return (
-//     <ContainerWrapper>
-//       <Nav />
-//       {children}
-//       <Footer />
-//     </ContainerWrapper>
-//   )
-// }
-
-// export default courses
-
 import React from "react"
 import { graphql } from "gatsby"
 import { Container, Content, FeatureImage } from "../components"
@@ -26,10 +9,12 @@ const courses = ({ data }) => {
     <Container>
       <FeatureImage fixed={featureImage} />
       <Content>
-        <H1 textAlign="center" margin="0 0 1rem 0">
+        <H1 color="light1" textAlign="center" margin="0 0 1rem 0">
           THIS IS THE COURSES CONTENT
         </H1>
-        <P>This is where all the COURSES live This is it is it it</P>
+        <P color="light2">
+          This is where all the COURSES live This is it is it it
+        </P>
       </Content>
     </Container>
   )

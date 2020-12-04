@@ -9,10 +9,10 @@ const main = ({ data }) => {
     <Container>
       <FeatureImage fixed={featureImage} />
       <Content>
-        <H1 textAlign="center" margin="0 0 1rem 0">
+        <H1 color="light2" textAlign="center" margin="0 0 1rem 0">
           THIS IS THE SYNTAX CONTENT
         </H1>
-        <P>
+        <P color="light2">
           This is where all the codes or syntax live This is where all the codes
           or syntax live This is where all the codes or syntax live This is
           where all the codes or syntax live This is where all the codes or

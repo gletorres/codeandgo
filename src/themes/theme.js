@@ -10,10 +10,10 @@ export default {
     dark1: "hsl(227, 2%, 12%)",
     dark2: "hsl(227, 2%, 26%)",
     dark3: "hsl(227, 2%, 64%)",
-    light1: "hsl(0, 0%, 92%)",
-    light2: "hsl(0, 0%, 95%)",
-    light3: "hsl(0, 0%, 97%)",
-    light4: "hsl(0, 0%, 99%)",
+    light1: "hsl(0, 0%, 70%)",
+    light2: "hsl(0, 0%, 92%)",
+    light3: "hsl(0, 0%, 95%)",
+    light4: "hsl(0, 0%, 97%)",
   },
 
   breakpoints: {
