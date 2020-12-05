@@ -22,19 +22,19 @@ export const Nav = () => {
         style={{
           textDecoration: "none",
           color: "slategrey",
-          fontSize: "20px",
+          fontSize: "18px",
         }}
       >
         BLOG
       </Link>
 
       <Link
-        to="/main/"
+        to="/syntax/"
         activeStyle={{ color: "red" }}
         style={{
           textDecoration: "none",
           color: "slategrey",
-          fontSize: "20px",
+          fontSize: "18px",
         }}
       >
         SYNTAX
@@ -46,7 +46,7 @@ export const Nav = () => {
         style={{
           textDecoration: "none",
           color: "slategrey",
-          fontSize: "20px",
+          fontSize: "18px",
         }}
       >
         COURSES

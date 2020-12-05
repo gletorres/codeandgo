@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import { Container, Content, FeatureImage } from "../blogComponents"
 import { H1, P } from "../blogElements"
 
-const main = ({ data }) => {
+const syntax = ({ data }) => {
   const featureImage = data.imageSharp.fixed
   return (
     <Container>
@@ -27,7 +27,7 @@ const main = ({ data }) => {
   )
 }
 
-export default main
+export default syntax
 
 export const maindQuery = graphql`
   query maindQuery {
