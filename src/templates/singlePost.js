@@ -1,8 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { H1 } from "../elements"
-import { Container, Post, FeatureImage, Seo } from "../components"
+import { H1 } from "../blogElements"
+import { Container, Post, FeatureImage, Seo } from "../blogComponents"
 
 const singlePost = ({ data }) => {
   const featureImage = data.mdx.frontmatter.featureImage.childImageSharp.fixed

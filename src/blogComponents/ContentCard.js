@@ -1,6 +1,6 @@
 import React from "react"
-import { CardWrapper, P, H2 } from "../elements"
-import { Button } from "../components/Button"
+import { CardWrapper, P, H2 } from "../blogElements"
+import { Button } from "./Button"
 
 export const ContentCard = ({ date, title, excerpt, slug }) => {
   return (

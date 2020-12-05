@@ -8,7 +8,7 @@ import {
   FeatureImage,
   Pagination,
   Seo,
-} from "../components"
+} from "../blogComponents"
 
 const allPosts = ({ pageContext, data }) => {
   const { currentPage, numPages } = pageContext

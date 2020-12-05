@@ -3,7 +3,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components"
 import { MDXProvider } from "@mdx-js/react"
 import { preToCodeBlock } from "mdx-utils"
 import theme from "./src/themes/theme"
-import { Code } from "./src/components"
+import { Code } from "./src/blogComponents"
 import "./language-tabs.css"
 
 const GlobalStyles = createGlobalStyle`

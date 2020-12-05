@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Container, Content, FeatureImage } from "../components"
-import { H1, P } from "../elements"
+import { Container, Content, FeatureImage } from "../blogComponents"
+import { H1, P } from "../blogElements"
 
 const courses = ({ data }) => {
   const featureImage = data.imageSharp.fixed

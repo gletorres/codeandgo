@@ -1,7 +1,7 @@
 import React from "react"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
-import { FeatureImageWrapper } from "../elements"
+import { FeatureImageWrapper } from "../blogElements"
 
 export const FeatureImage = ({ fixed }) => {
   const data = useStaticQuery(graphql`

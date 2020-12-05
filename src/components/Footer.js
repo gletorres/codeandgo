@@ -5,7 +5,7 @@ import {
   FooterSocialWrapper,
   FooterSocialIcons,
   P,
-} from "../elements"
+} from "../blogElements"
 
 export const Footer = () => {
   const data = useStaticQuery(graphql`
