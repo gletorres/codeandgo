@@ -1,7 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { Container, Content, FeatureImage } from "../blogComponents"
-import { H1, P } from "../blogElements"
+import { H1, CardWrapper } from "../blogElements"
+import { Link } from "gatsby"
+import "../../syntax.css"
 
 const syntax = ({ data }) => {
   const featureImage = data.imageSharp.fixed
@@ -9,19 +11,55 @@ const syntax = ({ data }) => {
     <Container>
       <FeatureImage fixed={featureImage} />
       <Content>
-        <H1 color="light2" textAlign="center" margin="0 0 1rem 0">
-          THIS IS THE SYNTAX CONTENT
-        </H1>
-        <P color="light2">
-          This is where all the codes or syntax live This is where all the codes
-          or syntax live This is where all the codes or syntax live This is
-          where all the codes or syntax live This is where all the codes or
-          syntax liveThis is where all the codes or syntax liveThis is where all
-          the codes or syntax liveThis is where all the codes or syntax liveThis
-          is where all the codes or syntax liveThis is where all the codes or
-          syntax liveThis is where all the codes or syntax liveThis is where all
-          the codes or syntax live where all the codes or syntax live
-        </P>
+        <H1 color="light2">HOOKS</H1>
+        <CardWrapper>
+          <Link className="link-wrapper" to="/use-state">
+            <div className="syntax-wrapper">
+              <H1 color="light2" margin="0 0 1rem 0">
+                useState
+              </H1>
+              <p className="learn-more" margin="0 0 1rem 0">
+                Learn More
+              </p>
+            </div>
+          </Link>
+        </CardWrapper>
+        <CardWrapper>
+          <Link className="link-wrapper" to="/use-effect">
+            <div className="syntax-wrapper">
+              <H1 color="light2" margin="0 0 1rem 0">
+                useEffect
+              </H1>
+              <p className="learn-more" margin="0 0 1rem 0">
+                Learn More
+              </p>
+            </div>
+          </Link>
+        </CardWrapper>
+        <CardWrapper>
+          <Link className="link-wrapper" to="/use-memo">
+            <div className="syntax-wrapper">
+              <H1 color="light2" margin="0 0 1rem 0">
+                useMemo
+              </H1>
+              <p className="learn-more" margin="0 0 1rem 0">
+                Learn More
+              </p>
+            </div>
+          </Link>
+        </CardWrapper>
+        <CardWrapper>
+          <Link className="link-wrapper" to="/use-selector">
+            <div className="syntax-wrapper">
+              <H1 color="light2" margin="0 0 1rem 0">
+                useSelector
+              </H1>
+              <p className="learn-more" margin="0 0 1rem 0">
+                Learn More
+              </p>
+            </div>
+          </Link>
+        </CardWrapper>
       </Content>
     </Container>
   )

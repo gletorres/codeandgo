@@ -21,7 +21,7 @@ export const Code = ({ codeString, language, ...props }) => {
                 ))}
               </div>
             ))}
-          </pre>
+        </pre>
         </div>
       )}
     </Highlight>

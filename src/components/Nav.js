@@ -39,18 +39,6 @@ export const Nav = () => {
       >
         SYNTAX
       </Link>
-
-      <Link
-        to="/courses/"
-        activeStyle={{ color: "red" }}
-        style={{
-          textDecoration: "none",
-          color: "slategrey",
-          fontSize: "18px",
-        }}
-      >
-        COURSES
-      </Link>
     </NavWrapper>
   )
 }
