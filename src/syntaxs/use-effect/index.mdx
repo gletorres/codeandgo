@@ -24,17 +24,21 @@ excerpt: It’s been a while since I started web development. In this article, I
 <div>Hello world</div>
 ```
 
-```css
-.header {
-  color: red;
-  margin: 20px;
-  padding: 2px;
-}
-```
-
 ```js
-const name = () => {
-  return name
+import React, { useState } from "react";
+import "./App.css";
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div className="App">
+      {count}
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+
+export default App;
 }
 ```
 
