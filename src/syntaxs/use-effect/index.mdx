@@ -3,60 +3,46 @@ title: useEffect
 slug: use-effect
 date: 2020-03-25
 featureImage: codeandgo-logo.png
-excerpt: It’s been a while since I started web development. In this article, I will explain how I started coding, from making a single basic component to complex components, breaking complex code into a single piece of components to render a single file into the browser and other stuff.
+excerpt: Why UseEffect.
 ---
 
-# Heading 1
+## What is useState and why do you use it?
 
-## Heading 2
+### I'll give you the basics and very common example of using useEffet that most of the React developer's used.
 
-### Heading 3
-
-#### Heading 4
-
-##### Heading 5
-
-###### Heading 6
-
-**THIS IS BOLD because of the two asterisk on both side**
-
-```html
-<div>Hello world</div>
-```
+`OLD way using "this.state" in a class base component`
 
 ```js
-import React, { useState } from "react";
-import "./App.css";
+import React, { Component } from "react"
+import "./App.css"
+//Lifecycle method
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { learn: false, num: 1 }
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-const App = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div className="App">
-      {count}
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </div>
-  );
-};
+  handleClick() {
+    this.setState(() => ({ learn: !this.state.learn }))
+  }
+  componentDidMount() {
+    //side effects after initial load
+    console.log("mounted")
+  }
+  componentDidUpdate() {
+    //side effects after reload cause by state change
+    console.log("updated")
+  }
 
-export default App;
+  render() {
+    return (
+      <div className="App">
+        <h1 onClick={this.handleClick}>Learn React Using "Class components"</h1>
+        <p>Learn React {this.state.learn ? "NEXT MONTH" : "NEXT YEAR"}?</p>
+      </div>
+    )
+  }
 }
+export default App
 ```
-
-If you hav any questions, please visit my website for more information
-[glenntorres.com](https://glennptorres.netlify.app/)
-
-1. First item
-2. Second item
-3. Third item
-
-- First item
-- Second item
-- Third item
-
-  Here's a sentence with a footnote. [^1]
-
-[^1]: This is the footnote.
-
-[Home:>](/)
-
-[<Previous: Fourth Post](/my-fourth-post)

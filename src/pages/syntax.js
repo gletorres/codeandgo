@@ -60,6 +60,30 @@ const syntax = ({ data }) => {
             </div>
           </Link>
         </CardWrapper>
+        <CardWrapper>
+          <Link className="link-wrapper" to="/use-reducer">
+            <div className="syntax-wrapper">
+              <H1 color="light2" margin="0 0 1rem 0">
+                useReducer
+              </H1>
+              <p className="learn-more" margin="0 0 1rem 0">
+                Learn More
+              </p>
+            </div>
+          </Link>
+        </CardWrapper>
+        <CardWrapper>
+          <Link className="link-wrapper" to="/use-context">
+            <div className="syntax-wrapper">
+              <H1 color="light2" margin="0 0 1rem 0">
+                useContext
+              </H1>
+              <p className="learn-more" margin="0 0 1rem 0">
+                Learn More
+              </p>
+            </div>
+          </Link>
+        </CardWrapper>
       </Content>
     </Container>
   )

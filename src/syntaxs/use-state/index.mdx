@@ -3,7 +3,7 @@ title: useState
 slug: use-state
 date: 2020-03-25
 featureImage: codeandgo-logo.png
-excerpt: It’s been a while since I started web development. In this article, I will explain how I started coding, from making a single basic component to complex components, breaking complex code into a single piece of components to render a single file into the browser and other stuff.
+excerpt: You can have state in your class component, you can construct component with state and then you can use that state to display the information inside of the render method and manipulate the state with certain function because you use "this.state".
 ---
 
 ## What is useState and why do you use it?
@@ -18,6 +18,44 @@ excerpt: It’s been a while since I started web development. In this article, I
 Visit: [React Hooks Rules](https://reactjs.org/docs/hooks-rules.html).
 
 ### I'll give you the basics and very common example of using useState that most of the React developer's used.
+
+`OLD way using "this.state" in a class base component`
+
+```js
+import React, { Component } from "react"
+
+class App_class extends Component {
+  constructor() {
+    super()
+    this.state = {
+      count: 0,
+    }
+  }
+  // componentDidMount() {
+  //   console.log("I have mounted");
+  // }
+  // componentDidUpdate() {
+  //   console.log("I have updated");
+  // }
+  // componentWillUnmount() {
+  //   console.log("I have Unmounted");
+  // }
+  render() {
+    const handleIncrementOnClick = () => {
+      this.setState({
+        count: this.state.count + 1,
+      })
+    }
+    return (
+      <div>
+        <h1>Count:{this.state.count}</h1>
+        <button onClick={handleIncrementOnClick}>clickMe</button>
+      </div>
+    )
+  }
+}
+export default App_class
+```
 
 `Increment and Decrement using useState`
 

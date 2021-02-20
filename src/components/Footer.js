@@ -29,7 +29,7 @@ export const Footer = () => {
       <FooterSocialWrapper>
         <FooterSocialIcons>
           <a
-            href="https://facebook.com"
+            href="https://web.facebook.com/groups/242695420571641/"
             rel="noreferrer noopener"
             target="_blank"
           >
